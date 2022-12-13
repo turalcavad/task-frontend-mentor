@@ -10,9 +10,11 @@ import { suggestionActions } from "./store/suggestionSlice";
 
 function App() {
   const dispatch = useAppDispatch();
+
   const suggestions: ISuggestion[] = useAppSelector(
     (state) => state.suggestions
   );
+  console.log(suggestions);
   const filterBy = useAppSelector((state) => state.filterBy);
 
   useEffect(() => {

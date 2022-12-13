@@ -24,6 +24,14 @@ const suggestionSlice = createSlice({
         (item, i, ar) => ar.indexOf(item) === i
       );
     },
+
+    addUpvote: (state, { payload }: PayloadAction<number>) => {
+      const suggestion = state.suggestions.find((c) => c.id === payload);
+
+      if (suggestion === undefined) return;
+
+      suggestion.upvotes++;
+    },
   },
 });
 

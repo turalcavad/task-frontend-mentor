@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { suggestionActions } from "../../store/suggestionSlice";
 
 const FeedbackBoard = () => {
-  const [alignment, setAlignment] = useState("web");
+  const [alignment, setAlignment] = useState("all");
   const dispatch = useAppDispatch();
   const categories = useAppSelector((state) => state.categories);
 
@@ -91,16 +91,16 @@ const FeedbackBoard = () => {
 
             <List>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <ListItemText primary={"hey"} />
+                <ListItemText primary={"Planned"} />
+                <Typography>3</Typography>
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <ListItemText primary={"Live"} />
                 <Typography>2</Typography>
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <ListItemText primary={"hey"} />
-                <Typography>2</Typography>
-              </Box>
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <ListItemText primary={"hey"} />
-                <Typography>2</Typography>
+                <ListItemText primary={"In-progress"} />
+                <Typography>5</Typography>
               </Box>
             </List>
           </Stack>

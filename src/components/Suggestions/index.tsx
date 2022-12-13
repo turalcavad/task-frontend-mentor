@@ -5,6 +5,9 @@ import { Stack } from "@mui/system";
 import Button from "@mui/material/Button";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { ISuggestion } from "../../@types/suggestion";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useAppDispatch } from "../../hooks";
+import { suggestionActions } from "../../store/suggestionSlice";
 
 const Suggestions: React.FC<ISuggestion> = ({
   id,
@@ -14,6 +17,12 @@ const Suggestions: React.FC<ISuggestion> = ({
   status,
   description,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const increaseUpvote = () => {
+    dispatch(suggestionActions.addUpvote(id));
+  };
+
   return (
     <Box
       sx={{
@@ -25,8 +34,27 @@ const Suggestions: React.FC<ISuggestion> = ({
         borderRadius: "15px",
       }}
     >
-      <Stack direction={"row"} spacing={5}>
-        <Typography>Hey</Typography>
+      <Stack direction={"row"} spacing={5} alignItems="center">
+        <Button
+          onClick={increaseUpvote}
+          variant="contained"
+          sx={{
+            padding: "10px",
+            bgcolor: "#F2F4FE",
+            minWidth: "40px",
+            maxHeight: "50px",
+            flexDirection: "column",
+            color: "#4661E6",
+            ":hover": {
+              color: "#fff",
+            },
+          }}
+        >
+          <KeyboardArrowUpIcon color="inherit" />
+          <Typography fontSize={"10px"} fontWeight={"600"}>
+            {upvotes}
+          </Typography>
+        </Button>
 
         <Stack spacing={1}>
           <Typography variant="h6" fontWeight={600}>
