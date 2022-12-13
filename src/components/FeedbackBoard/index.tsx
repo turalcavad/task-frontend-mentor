@@ -8,15 +8,27 @@ import React from "react";
 import StyledButtonGroup from "../StyledButtonGroup";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { suggestionActions } from "../../store/suggestionSlice";
 
 const FeedbackBoard = () => {
   const [alignment, setAlignment] = useState("web");
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector((state) => state.categories);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string
   ) => {
+    console.log(newAlignment);
+    if (newAlignment === null) {
+      setAlignment("all");
+      dispatch(suggestionActions.filterBy("ALL"));
+      return;
+    }
+
     setAlignment(newAlignment);
+    dispatch(suggestionActions.filterBy(newAlignment));
   };
 
   return (
@@ -57,9 +69,13 @@ const FeedbackBoard = () => {
               maxWidth: "230px",
             }}
           >
-            <ToggleButton value="android">All</ToggleButton>
-            <ToggleButton value="web">UI</ToggleButton>
-            <ToggleButton value="ios">UX</ToggleButton>
+            <ToggleButton value="all">All</ToggleButton>
+
+            {categories.map((category: string) => (
+              <ToggleButton value={category}>
+                {category.toUpperCase()}
+              </ToggleButton>
+            ))}
           </StyledButtonGroup>
         </Box>
 

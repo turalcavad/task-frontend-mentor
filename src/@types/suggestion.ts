@@ -10,4 +10,5 @@ export interface ISuggestion {
 export type SuggestionType = {
   suggestions: ISuggestion[];
   filterBy: string;
+  categories: Array<string>;
 };
